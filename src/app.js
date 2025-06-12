@@ -32,27 +32,39 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
 
   const filePath = req.file.path;
 
-  //Using pdf-lib to get total pages
+  // step 2.1: Using pdf-lib to get total pages
   const pdfBytes = fs.readFileSync(filePath);
   const pdfDoc = await PDFDocument.load(pdfBytes);
   const totalPages = pdfDoc.getPageCount();
 
-  // ✅ Step 5.2: Convert PDF pages to images using pdf-poppler
+  // ✅Step 2.2: Converting PDF pages to images using pdf-poppler
   const popplerOptions = {
     format: "jpeg",
     out_dir: "./pages",
     out_prefix: "page",
     page: null, // all pages
   };
- const data= await poppler.convert(filePath, popplerOptions);
+  const data = await poppler.convert(filePath, popplerOptions);
 
+  //  * step 3 : scanning each pages with tesseract.js
   const finalQuestions = [];
-  //set up pdf2pic to convert pages to images
+  let dataTest;
 
-  //  Process each page
+  for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+    const pageImagePath = `pages/page-${
+      pageNum < 10 ? `0${pageNum}` : pageNum
+    }.jpg`;
+
+    // 🧠 Step 5.3.1: OCR with Tesseract
+    const {
+      data: { text },
+    } = await Tesseract.recognize(pageImagePath, "eng");
+    finalQuestions.push({ page: pageNum, text: text.trim() });
+  }
 
   res.send({
-    fileUpload: "PDF uploaded successfully: " + req.file.originalname,data
+    fileUpload: "PDF uploaded successfully: " + req.file.originalname,
+    finalQuestions,
   });
 });
 
