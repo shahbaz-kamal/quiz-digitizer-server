@@ -1,107 +1,4 @@
-
-
-
-const geminiContents = [
-    {
-      text: `
-  You are an expert educational content extractor. Your task is to process the provided image (of a worksheet page) and its OCR text. Your goal is to digitize the content into a structured JSON format suitable for building interactive quizzes.
-  
-  **High-Level Document Metadata Extraction:**
-  From the current page, especially if it appears to be a cover page, extract the following overall document details. If not found, return 'null'.
-  - "institution_name": string (e.g., "AI TONG SCHOOL", "Anglo-Chinese School")
-  - "exam_name": "string" (e.g., "Science Practical Assessment 2024", "2023 P6 PRELIMINARY EXAM", "2024 Term 2 Review")
-  - "subject": string (e.g., "Science", "MATHEMATICS")
-  - "paper": "string" // (e.g., "Paper 1", "Paper 2", "Paper 3"). Null if not specified.
-  - "class_name": string // (e.g., "Primary 4", "P6")
-  - "exam_duration": "string" // (e.g., "40 minutes", "1 hour 30 minutes"). Null if not specified.
-  - "global_instructions": [Array of  string] // Extract any document-wide instructions (e.g., "INSTRUCTIONS TO CANDIDATES"). Null if not present.
-  
-  **Question and Content Block Extraction:**
-  For each distinct question or logical content block on the page, extract the following details.
-  
-  **JSON Structure:**
-  Return the extracted information as a single JSON object. The 'questions' property will be an array of question objects. Ensure the JSON is valid.
-  
-  \`\`\`json
-  {
-    "institution_name": "string | null",
-    "exam_name": "string | null",
-    "subject": "string | null",
-    "paper": "string | null",
-    "class_name": "string | null",
-    "exam_duration": "string | null",
-    "global_instructions": "string | null",
-    "questions": [
-      {
-        "id": "string", // A unique identifier for the question block (e.g., "Q1", "Activity1_Q3", "SectionB_Q10").
-        "individual_instructions": "string | null", // Specific instructions for this question block, if it introduces a set of questions (e.g., "Questions 1 to 5 carry 2 marks each."). Null if none.
-        "main_question_text": "string | null", // The common text/stem for questions with multiple sub-parts (e.g., "The diagram below shows..."). Null if no sub-parts . it's a single question then that question text will be provided.
-        "diagram_info": [ // Array of diagrams/visuals associated with this question block or its main context.
-          {
-            "diagram_description": "string", // A brief, actionable description of the visual for an image generation model. Include labeled parts where relevant (e.g., "Diagram of human digestive system with parts A, B, C, D labeled").
-            "diagram_bounding_boxes": [], // Array of bounding boxes for *each* identified visual element within this diagram_info entry. Each box: { "x_min": number, "y_min": number, "x_max": number, "y_max": number }.
-            "is_table": "boolean", // True if the visual is identified as a table that provides data for questions.
-            "page_number": "string" // The page number where this specific visual is found (e.g., "01", "02").
-          }
-        ],
-        "parts": [ // Array of question parts. If a single question, it will contain one part with "part_id": "main".
-          {
-            "part_id": "string", // Identifier for the part (e.g., "a", "b", "c" or "main" for single questions).
-            "type": "string", // Shorthanded: "MCQ", "SAQ", "Activity", "Table_Interp", "Drawing_Labeling", "Problem_Solving", "Other".
-            "question_text": "string", // The full text of this specific question part. For activities, this is the activity's main instruction/description.
-            "options": [], // Array of strings for MCQ options or mathematicla questions that look like short question. Empty array [] if written questions.
-            "correct_answer": "string | null" // The correct option text/ID, or expected short answer/solution text. If not explicitly found on the page, return "N/A". DO NOT GUESS for general questions. For Math problems, if an answer is solved/explicitly shown on the page, extract it.
-          }
-        ]
-      }
-    ]
-  }
-  \`\`\`
-  
-  **Specific Instructions & Considerations:**
-  
-  1.  **Handwritten Text:** Explicitly ignore any handwritten text, markings, or calculations. Focus solely on printed content.
-  2.  **Question Types:**
-      * **"MCQ" (Multiple Choice Question):** Has a question, specific options (A, B, C, D, or 1, 2, 3, 4).
-      * **"SAQ" (Short Answer Question):** Requires a brief textual answer.
-      * **"Activity" (Activity/Instruction):** Describes a task or experiment, often with steps, without a specific answer format, or asks for observation/explanation. Treat "Activity 1", "Activity 2", etc., as primary question blocks. Their introductory text (e.g., "ACTIVITY 1 (8 marks) Materials given: ... Instructions: ...") should be the 'main_question_text' or part of the first 'question_text' in the 'parts' array.
-      * **"Table_Interp" (Table/Data Interpretation):** Involves extracting data from a table or interpreting data from a graph/chart.
-      * **"Drawing_Labeling" (Drawing/Labeling):** Asks the user to draw something or label parts of a diagram.
-      * **"Problem_Solving" (Problem Solving):** Typically involves calculations or logical deduction, common in Math papers.
-      * **"Other":** For anything not fitting the above.
-  3.  **Options Generation:**
-      * If a question is clearly an MCQ and options are provided in the OCR text, extract them into the "options" array.
-      * If a question is a mathematical problem or a Short Answer type and *no explicit options are given*, set "options: []". Do NOT generate arbitrary options.
-      * If a question is a "Drawing_Labeling" or "Activity" type, set "options: []".
-  4.  **Correct Answer Determination:**
-      * If a clear correct answer (e.g., circled option, explicit answer in a table, solved working visibly shown on the page for a mathematical problem, or answers from a correction template shown on the same page) is present, extract it into "correct_answer".
-      * If the "correct_answer" cannot be confidently extracted from the current page's context, set "correct_answer: "N/A" ". Do not guess.
-  5.  **Diagrams and Tables:**
-      * For any visual elements (diagrams, graphs, charts, images) that are part of a question's context or a standalone visual on the page, provide a "diagram_description" and an array of "diagram_bounding_boxes".
-      * "diagram_bounding_boxes" should contain precise pixel coordinates for *each significant element* within the visual (e.g., for a diagram with labels, provide a box for the overall diagram AND for each label if distinguishable).
-      * If a visual is a table that provides data for questions, set "is_table: true".
-      * If a table is used *as options* within an MCQ (e.g., a classification question where options are presented in rows/columns), treat these rows/columns as options in the "options" array, and do NOT include them in "diagram_info" (unless the table itself is also a primary diagram for the question, then include it but note it's also acting as options).
-  6.  **Sub-Question Grouping:**
-      * If a question has a main descriptive text/diagram (e.g., "The diagram below shows...", "The following table shows...") followed by sub-questions (a), (b), (c) that refer to that main text/diagram (e.g., Q8, Q9, Q10 in "P6 done ACS_Primary 2 3.02.04 AM.pdf"), then:
-          * Create *one* question object for the main question block.
-          * Populate "main_question_text" with the common description.
-          * Place each sub-question (a), (b), (c) as separate objects within the "parts" array, each with its "part_id", "type", ""question_text, "options" (if MCQ), and "correct_answer".
-          * "diagram_info" should be at the main question object level if it applies to all parts.
-      * If questions are distinct and sequentially numbered (e.g., 1, 2, 3...) with no shared stem, create separate question objects for each, and their "parts" array will contain a single entry with '"part_id": "main"'.
-  7.  **Individual Instructions:** If a text block provides instructions for a *set* of questions (e.g., "Questions 1 to 5 carry 2 marks each."), capture this text in the "individual_instructions" property of the *first question object* it applies to.
-  
-  **Provided Text (OCR Output for page ${pageNum}):**
-  ${text}
-  
-  **Image Context:**
-  [The image of the page itself will be provided alongside this text via the multimodal API input. Gemini will use its visual understanding in conjunction with the OCR text.]
-  
-  Now, based on the above comprehensive instructions and the text, please provide the JSON output. Ensure the output is a single, valid JSON object following the specified structure.
-      `,
-    },
-  ];
-
-  const test=[
+const test1=[
     {
         "institution_name": "Anglo-Chinese School",
         "exam_name": "2023 P6 PRELIMINARY EXAM",
@@ -110,11 +7,12 @@ const geminiContents = [
         "class_name": "PRIMARY SIX",
         "exam_duration": "1 hour 30 minutes",
         "global_instructions": [
+            "INSTRUCTIONS TO CANDIDATES",
             "This question paper consists of 16 printed pages, including the cover page.",
             "Do not turn this page until you are told to do so.",
-            "Follow all instructions carefully.",
-            "Answer all questions.",
-            "Use a dark blue or black ballpoint pen to write your answers in the space provided for each question.",
+            "Follow all instructions carefully”",
+            "Answer al questions.",
+            "Use a dark blue or black ballpoint pen to write your answers in the space provided for each Guesion:",
             "Do not use correction fluid/tape or highlighters.",
             "You are allowed to use a calculator."
         ],
@@ -139,7 +37,12 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "The cost of 3 chairs and 5 tables is $360. The cost of 6 chairs and 15 tables is $900. What is the cost of 1 table? (Round off the answer to the nearest $10.)",
-                        "options": [],
+                        "options": [
+                            "60",
+                            "70",
+                            "50",
+                            "80"
+                        ],
                         "correct_answer": "60"
                     }
                 ]
@@ -150,10 +53,18 @@ const geminiContents = [
                 "main_question_text": null,
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram of a rhombus ABCD. Angle BAC is labeled as 51 degrees. Angles x and y are marked at vertices C and B respectively.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Rhombus ABCD with angle BAC = 51 degrees, angles x and y labeled at vertices C and B respectively.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 377,
+                                "y_min": 494,
+                                "x_max": 572,
+                                "y_max": 632
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "02"
+                        "page_number": "02",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -161,12 +72,18 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "ABCD is a rhombus. ∠BAC = 51°. What is the sum of ∠x and ∠y?",
-                        "options": [],
+                        "options": [
+                            "102",
+                            "129",
+                            "78",
+                            "51"
+                        ],
                         "correct_answer": "129"
                     }
                 ]
             }
-        ]
+        ],
+        "BP-371": null
     },
     {
         "institution_name": null,
@@ -180,22 +97,35 @@ const geminiContents = [
             {
                 "id": "Q3",
                 "individual_instructions": null,
-                "main_question_text": "A tank contained 6t of water. The graph below shows the amount of water left in a tank at the end of each day.",
+                "main_question_text": "A tank contained 6l of water. The graph below shows the amount of water left in a tank at the end of each day. What is the total amount of water used on Day 2 and Day 4?",
                 "diagram_info": [
                     {
-                        "diagram_description": "A line graph titled 'Amount of Water Left' showing the amount of water (in liters) remaining in a tank at the end of each day from Day 1 to Day 4. The x-axis is labeled 'Day 1', 'Day 2', 'Day 3', and 'Day 4'. The y-axis is labeled 'Amount of Water (ℓ)' with values from 0 to 6.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Line graph titled \"Amount of Water Left\" showing the amount of water in liters (l) on the y-axis and the day on the x-axis, from Day 1 to Day 4. The y-axis ranges from 0 to 6. The line starts at approximately 5 liters on Day 1, goes to 4 liters on Day 2, around 2.8 liters on Day 3 and around 1.3 liters on Day 4.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 140,
+                                "y_min": 180,
+                                "x_max": 500,
+                                "y_max": 400
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "03"
+                        "page_number": "03",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
                     {
                         "part_id": "main",
-                        "type": "Table_Interp",
-                        "question_text": "What is the total amount of water used on Day 2 and Day 4?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "type": "Problem_Solving",
+                        "question_text": null,
+                        "options": [
+                            "4.7",
+                            "1.7",
+                            "2.7",
+                            "3.7"
+                        ],
+                        "correct_answer": "2.7"
                     }
                 ]
             }
@@ -211,7 +141,7 @@ const geminiContents = [
         "global_instructions": null,
         "questions": [
             {
-                "id": "4",
+                "id": "Q4",
                 "individual_instructions": null,
                 "main_question_text": null,
                 "diagram_info": [],
@@ -220,13 +150,18 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "Mrs Lim bought a watch at a discount of 15% and she paid $124.10, not including GST. What is the original price of the watch including 8% GST?",
-                        "options": [],
-                        "correct_answer": "$155.63"
+                        "options": [
+                            "135.78",
+                            "145.56",
+                            "155.63",
+                            "160.23"
+                        ],
+                        "correct_answer": "155.63"
                     }
                 ]
             },
             {
-                "id": "5",
+                "id": "Q5",
                 "individual_instructions": null,
                 "main_question_text": null,
                 "diagram_info": [],
@@ -235,8 +170,13 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "Mrs Sim bought a bag for $140. She paid the cashier in $10 and $5 notes. If there were fifteen notes altogether, how many $10 notes were there?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "11",
+                            "12",
+                            "13",
+                            "14"
+                        ],
+                        "correct_answer": "13"
                     }
                 ]
             }
@@ -253,14 +193,22 @@ const geminiContents = [
         "questions": [
             {
                 "id": "Q6",
-                "individual_instructions": "For questions 6 to 17, show your working clearly in the space provided for each\nquestion and write your answers in the spaces provided. The number of marks\navailable is shown in brackets [] at the end of each question or part-question.\n(45 marks)",
-                "main_question_text": "The figure below is formed by joining five identical 3/4-circle discs. Points A, B,\nC, D and E are centres of each 3/4-circle disc. Given that the distance between\nB and D is 17 cm and the distance between the first and the last disc is 48 cm,\nfind the length AB.",
+                "individual_instructions": "For questions 6 to 17, show your working clearly in the space provided for each question and write your answers in the spaces provided. The number of marks available is shown in brackets [] at the end of each question or part-question.",
+                "main_question_text": "The figure below is formed by joining five identical 3/4-circle discs. Points A, B, C, D and E are centres of each 3/4-circle disc. Given that the distance between B and D is 17 cm and the distance between the first and the last disc is 48 cm, find the length AB.",
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram showing five joined 3/4 circle discs with centers A, B, C, D and E.  The distance between centers B and D is marked as 17 cm. The distance between the leftmost and rightmost edge is marked as 48 cm.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Diagram of five circle discs joined together, with centers A, B, C, D, and E labeled. The distance between B and D is labeled as 17 cm. The distance between the first and the last disc is labeled as 48 cm. The radius of the first disc is labelled 2 cm.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 260,
+                                "y_min": 344,
+                                "x_max": 575,
+                                "y_max": 467
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "5"
+                        "page_number": "5",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -268,8 +216,13 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "Find the length AB.",
-                        "options": [],
-                        "correct_answer": "12cm"
+                        "options": [
+                            "9 cm",
+                            "10 cm",
+                            "12 cm",
+                            "14 cm"
+                        ],
+                        "correct_answer": "12 cm"
                     }
                 ]
             }
@@ -287,36 +240,59 @@ const geminiContents = [
             {
                 "id": "Q7",
                 "individual_instructions": null,
-                "main_question_text": "Serena has a monthly salary of $8650. She spent 1/5 of her money on food.\nThe pie chart below shows how she used her monthly salary.",
+                "main_question_text": "Serena has a monthly salary of $8650. She spent 1/5 of her money on food. The pie chart below shows how she used her monthly salary.",
                 "diagram_info": [
                     {
-                        "diagram_description": "Pie chart showing Serena's monthly salary usage. The chart is divided into Savings ($3000), Food, Transport ($865), Rent ($2422), and Shopping.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Pie chart showing Serena's monthly salary usage: Savings ($3000), Food, Transport ($865), Rent ($2422), and Shopping.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 326,
+                                "y_min": 168,
+                                "x_max": 529,
+                                "y_max": 380
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "06"
+                        "page_number": "6",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
                     {
                         "part_id": "a",
-                        "type": "SAQ",
+                        "type": "Problem_Solving",
                         "question_text": "How much money did Serena spend on food?",
-                        "options": [],
+                        "options": [
+                            "$1730",
+                            "$1733",
+                            "$17330",
+                            "$1700"
+                        ],
                         "correct_answer": "$1730"
                     },
                     {
                         "part_id": "b",
-                        "type": "SAQ",
+                        "type": "Problem_Solving",
                         "question_text": "What fraction of her salary did Serena spend on rent and transport?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "3087/8650",
+                            "3287/8650",
+                            "3387/8650",
+                            "3487/8650"
+                        ],
+                        "correct_answer": "3287/8650"
                     },
                     {
                         "part_id": "c",
-                        "type": "SAQ",
-                        "question_text": "What percentage of her salary did she spend on shopping?\nGive your answer correct to nearest 1%.",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "type": "Problem_Solving",
+                        "question_text": "What percentage of her salary did she spend on shopping? Give your answer correct to nearest 1%.",
+                        "options": [
+                            "31%",
+                            "32%",
+                            "33%",
+                            "34%"
+                        ],
+                        "correct_answer": "34%"
                     }
                 ]
             }
@@ -334,13 +310,21 @@ const geminiContents = [
             {
                 "id": "Q8",
                 "individual_instructions": null,
-                "main_question_text": "The figure below is not drawn to scale. ABEF is a parallelogram and BCDE is a trapezium. BE//CD, AB//FD and BC//AD, DF is a straight line. ∠ADF = 42° and ∠DAF = 68°.",
+                "main_question_text": "The figure below is not drawn to scale. ABEF is a parallelogram and BCDE is a trapezium. BE//CD, AB//FD and BC//AD, DF is a straight line.\n∠ADF = 42° and ∠DAF = 68°.",
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram of a parallelogram ABEF and a trapezium BCDE with angles and parallel lines labeled. ABEF is on top, and BCDE is on the bottom. Angle ADF is labeled 42 degrees and angle DAF is labeled 68 degrees.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Diagram of a geometric figure with labeled points A, B, C, D, E, F. Angles ∠ADF = 42° and ∠DAF = 68° are indicated.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 336,
+                                "y_min": 175,
+                                "x_max": 512,
+                                "y_max": 339
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "07"
+                        "page_number": "7",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -348,22 +332,37 @@ const geminiContents = [
                         "part_id": "a",
                         "type": "Problem_Solving",
                         "question_text": "Find ∠BCD.",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "110",
+                            "118",
+                            "120",
+                            "122"
+                        ],
+                        "correct_answer": "118"
                     },
                     {
                         "part_id": "b",
                         "type": "Problem_Solving",
                         "question_text": "Find ∠ABE.",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "108",
+                            "110",
+                            "112",
+                            "114"
+                        ],
+                        "correct_answer": "110"
                     },
                     {
                         "part_id": "c",
                         "type": "Problem_Solving",
                         "question_text": "Find ∠BEF.",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "72",
+                            "70",
+                            "68",
+                            "66"
+                        ],
+                        "correct_answer": "70"
                     }
                 ]
             }
@@ -388,8 +387,13 @@ const geminiContents = [
                         "part_id": "a",
                         "type": "Problem_Solving",
                         "question_text": "What time did they meet?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "10:00 a.m.",
+                            "11:00 a.m.",
+                            "12:00 p.m.",
+                            "1:00 p.m."
+                        ],
+                        "correct_answer": "11:00 a.m."
                     },
                     {
                         "part_id": "b",
@@ -417,17 +421,24 @@ const geminiContents = [
                 "main_question_text": "The following table shows the charges for making an overseas call to Australia.",
                 "diagram_info": [
                     {
-                        "diagram_description": "Table showing overseas call charges. Rows: First 15 minutes, Every additional minute. Columns: $2.60, p cents per minute",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Table showing overseas call charges. The table has two rows: First 15 minutes with a charge of $2.60 and Every additional minute with a charge of p cents per minute",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 273,
+                                "y_min": 321,
+                                "x_max": 512
+                            }
+                        ],
                         "is_table": true,
-                        "page_number": "09"
+                        "page_number": "9",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
                     {
                         "part_id": "a",
                         "type": "Problem_Solving",
-                        "question_text": "Mrs Jamús paid $32 for a phone call to her sister in Australia. What was the duration of the call? Leave your answer in terms of p.",
+                        "question_text": "Mrs Jamús paid $32 for a phone call to her sister in Australia. What was the duration of the call? Leave your answer in tems of p.",
                         "options": [],
                         "correct_answer": "N/A"
                     },
@@ -454,7 +465,7 @@ const geminiContents = [
             {
                 "id": "Q11",
                 "individual_instructions": null,
-                "main_question_text": "Bottles A, B and C contain 7.35 litres of oil altogether. of the oil in Bottle A is transferred to Bottle B. After that, of the oil in Bottle B is transferred to Bottle C. Now, Bottle A has twice the amount of oil in Bottle B and Bottle B has twice the amount of oil in Bottle C.",
+                "main_question_text": "Bottles A, B and C contain 7.35 litres of oil altogether. 1/5 of the oil in Bottle A is transferred to Bottle B. After that, 1/5 of the oil in Bottle B is transferred to Bottle C. Now, Bottle A has twice the amount of oil in Bottle B and Bottle B has twice the amount of oil in Bottle C.",
                 "diagram_info": [],
                 "parts": [
                     {
@@ -494,14 +505,24 @@ const geminiContents = [
                         "part_id": "a",
                         "type": "Problem_Solving",
                         "question_text": "Marcus gets 6 wins in a row. What will be his score for the 6th win?",
-                        "options": [],
+                        "options": [
+                            "15",
+                            "13",
+                            "17",
+                            "11"
+                        ],
                         "correct_answer": "13"
                     },
                     {
                         "part_id": "b",
                         "type": "Problem_Solving",
                         "question_text": "How many times must he win the game in a row for him to achieve 99 points?",
-                        "options": [],
+                        "options": [
+                            "11",
+                            "49",
+                            "37",
+                            "41"
+                        ],
                         "correct_answer": "49"
                     }
                 ]
@@ -523,10 +544,18 @@ const geminiContents = [
                 "main_question_text": "The figure below is made up of four squares of sides 10 cm, four quadrants and eight semicircles. Find the total area of the shaded parts. (Take π = 3.14)",
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram showing four squares with sides labeled as 10 cm, four quadrants, and eight semicircles, some parts of the image are shaded.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Diagram consisting of four squares of sides 10cm, four quadrants, and eight semicircles. The shaded parts are the areas inside the squares not covered by the quadrants and semicircles.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 177,
+                                "y_min": 323,
+                                "x_max": 438,
+                                "y_max": 557
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "12"
+                        "page_number": "12",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -534,7 +563,12 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "Find the total area of the shaded parts.",
-                        "options": [],
+                        "options": [
+                            "196",
+                            "197",
+                            "198",
+                            "199"
+                        ],
                         "correct_answer": "198"
                     }
                 ]
@@ -556,53 +590,18 @@ const geminiContents = [
                 "main_question_text": "The container shown below is made up of 2 cuboids and a 6-cm cube. The small cuboid has a square base of side 3 cm. The dimension of the big cuboid is 16 cm by 9 cm by 5 cm. There is 864 mt of water in the container and the height of the water level in the small cuboid and the cube is the same. What is the height of the water level from the base of the container?",
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram of a container made up of 2 cuboids and a 6-cm cube. The small cuboid has a square base of side 3 cm. The dimension of the big cuboid is 16 cm by 9 cm by 5 cm. Labels: 3 cm, 6 cm, 16 cm, 9 cm, 5 cm, ? cm.",
+                        "diagram_description": "Diagram showing two cuboids and a cube containing water, labeled dimensions of 16cm, 9cm, 5cm, 3cm, 6cm, and a question mark for the unknown water height.",
                         "diagram_bounding_boxes": [
                             {
-                                "x_min": 365,
-                                "y_min": 328,
-                                "x_max": 701,
-                                "y_max": 573
-                            },
-                            {
-                                "x_min": 516,
-                                "y_min": 340,
-                                "x_max": 532,
-                                "y_max": 354
-                            },
-                            {
-                                "x_min": 438,
-                                "y_min": 377,
-                                "x_max": 453,
-                                "y_max": 391
-                            },
-                            {
-                                "x_min": 641,
-                                "y_min": 442,
-                                "x_max": 656,
-                                "y_max": 456
-                            },
-                            {
-                                "x_min": 568,
-                                "y_min": 329,
-                                "x_max": 584,
-                                "y_max": 343
-                            },
-                            {
-                                "x_min": 371,
-                                "y_min": 489,
-                                "x_max": 387,
-                                "y_max": 503
-                            },
-                            {
-                                "x_min": 473,
-                                "y_min": 548,
-                                "x_max": 491,
-                                "y_max": 564
+                                "x_min": 319,
+                                "y_min": 350,
+                                "x_max": 586,
+                                "y_max": 551
                             }
                         ],
                         "is_table": false,
-                        "page_number": "13"
+                        "page_number": "13",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -610,8 +609,13 @@ const geminiContents = [
                         "part_id": "main",
                         "type": "Problem_Solving",
                         "question_text": "What is the height of the water level from the base of the container?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "7",
+                            "6",
+                            "8",
+                            "5"
+                        ],
+                        "correct_answer": "7"
                     }
                 ]
             }
@@ -636,14 +640,24 @@ const geminiContents = [
                         "part_id": "a",
                         "type": "Problem_Solving",
                         "question_text": "What was the average mark of the three boys?",
-                        "options": [],
+                        "options": [
+                            "79",
+                            "82",
+                            "86",
+                            "90"
+                        ],
                         "correct_answer": "86"
                     },
                     {
                         "part_id": "b",
                         "type": "Problem_Solving",
                         "question_text": "Simon's mark was recorded incorrectly. He was given an additional of 7.5 marks. What is the correct average score of the 3 boys?",
-                        "options": [],
+                        "options": [
+                            "81.5",
+                            "82.5",
+                            "83.5",
+                            "84.5"
+                        ],
                         "correct_answer": "83.5"
                     }
                 ]
@@ -662,13 +676,21 @@ const geminiContents = [
             {
                 "id": "Q16",
                 "individual_instructions": null,
-                "main_question_text": "The figure below is not drawn to scale. ABE is an equilateral triangle and BCD is an isosceles triangle. ABC and BDF are straight lines and AC//EF.\nZEBD = 90° and BED = 43°.",
+                "main_question_text": "The figure below is not drawn to scale. ABE is an equilateral triangle and BCD is an isosceles triangle. ABC and BDF are straight lines and AC//EF. ∠EBD = 90° and ∠BED = 43°.",
                 "diagram_info": [
                     {
-                        "diagram_description": "Diagram of interconnected triangles: ABE, BCD, and EDF. ABE is marked as equilateral. BCD is isosceles. Angle EBD is 90 degrees. Angle BED is 43 degrees. Labeled points: A, B, C, D, E, F.",
-                        "diagram_bounding_boxes": [],
+                        "diagram_description": "Diagram of intersecting lines and triangles. Triangle ABE is equilateral, and triangle BCD is isosceles. Angles EBD and BED are labeled as 90 degrees and 43 degrees respectively. Labeled parts are A, B, C, D, E, F.",
+                        "diagram_bounding_boxes": [
+                            {
+                                "x_min": 120,
+                                "y_min": 271,
+                                "x_max": 512,
+                                "y_max": 475
+                            }
+                        ],
                         "is_table": false,
-                        "page_number": "15"
+                        "page_number": "15",
+                        "diagram_img_url": "null"
                     }
                 ],
                 "parts": [
@@ -677,14 +699,14 @@ const geminiContents = [
                         "type": "Problem_Solving",
                         "question_text": "Find ∠CBF.",
                         "options": [],
-                        "correct_answer": "30'"
+                        "correct_answer": "30"
                     },
                     {
                         "part_id": "b",
                         "type": "Problem_Solving",
                         "question_text": "Find ∠BDC.",
                         "options": [],
-                        "correct_answer": "75'"
+                        "correct_answer": "75"
                     },
                     {
                         "part_id": "c",
@@ -716,15 +738,25 @@ const geminiContents = [
                         "part_id": "a",
                         "type": "Problem_Solving",
                         "question_text": "How many twenty-cent coins were removed?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "24",
+                            "30",
+                            "15",
+                            "18"
+                        ],
+                        "correct_answer": "30"
                     },
                     {
                         "part_id": "b",
                         "type": "Problem_Solving",
                         "question_text": "How many one-dollar coins were there in the box?",
-                        "options": [],
-                        "correct_answer": "N/A"
+                        "options": [
+                            "120",
+                            "90",
+                            "72",
+                            "48"
+                        ],
+                        "correct_answer": "120"
                     }
                 ]
             }
