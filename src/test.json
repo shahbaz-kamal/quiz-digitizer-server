@@ -1,0 +1,19 @@
+{
+    "id": "unique_id_for_question_e.g._Q1", // A unique identifier for the question (e.g., Q1, Q2, Activity1_Q3)
+    "instructions": "string", // Any specific instructions or context for the question, if present. Use "null" if not applicable.
+    "type": "string", // One of "MCQ", "Short Answer", "Activity/Instruction", "Table/Data Interpretation", "Drawing/Labeling", "Problem Solving", "Other"
+    "question_text": "string", // The full text of the question. Include instructions if it's an activity.
+    "options": [ // Array of strings, only for MCQ type
+      "string" // e.g., "A) Option text", "1) Option text"
+    ],
+    "correct_answer": "string", // The correct option ID (e.g., "A", "B", "1") or the expected short answer/solution text. If not found on the page, then you find the correct option.
+	"diagram_info": [{
+	"page_no":01 //01,02.......09,10,11 etc
+	    "diagram_description": Array of string, // A brief description of any associated diagram so that i can generate it with image model (e.g., "Diagram of human digestive system with parts (parts name should be told) A, B, C, D labeled"). Use "null" if no diagram.if there is two diagram please then first diagram description will be added on index 0 and second will be added on index 1 and this will go on
+    "diagram_img_url": null //will be filled afterwards when imgbb file upload completes
+	    "diagram_bounding_boxes": 
+    { "x_min": 100, "y_min": 200, "x_max": 500, "y_max": 400 }
+  
+	},{fill with same information if two or more diagra diagram present}]
+
+  }
