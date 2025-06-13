@@ -12,9 +12,6 @@ const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-
-
-
 const path = require("path");
 
 const poppler = require("pdf-poppler");
@@ -23,6 +20,7 @@ const detectDiagramsFromPage = require("./utils/detectsDiagramFromPage");
 const uploadToImgBB = require("./utils/uploadToimgBB");
 const processingAndUploadingDiagram = require("./utils/processingAndUploadingDiagram");
 const cropWithFallback = require("./utils/cropWithFallbacks");
+const { questionCollection } = require("./utils/connectDB");
 
 const app = express();
 
@@ -98,7 +96,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
     }
 
     //*  Step 4: Using Gemini AI to process the text
- 
+
     // const geminiContents = [
     //   {
     //     text: `
@@ -564,7 +562,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
       model: "gemini-2.5-flash-preview-05-20",
       contents: [{ role: "user", parts: geminiContents }],
       generationConfig: {
-        responseMimeType: "application/json", 
+        responseMimeType: "application/json",
       },
     });
     // console.log(response.text);
@@ -575,7 +573,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
     // let parsedPageContent = JSON.parse(cleanedJsonString);
 
     // * Step 5: Cropping diagram with sharp ,uploading it to imageBB and getting the link.
-   
+
     let parsedPageContent = JSON.parse(cleanedJsonString);
     const diagramsOnPage = [];
 
@@ -607,6 +605,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
     }
 
     finalQuestions.push(parsedPageContent);
+    await questionCollection.insertOne(parsedPageContent);
   }
   // *✅ Step 6: Saving final JSON
   console.log(finalQuestions);

@@ -13,7 +13,7 @@ async function cropWithFallback(imagePath, diagram, cropId) {
     const image = sharp(imagePath);
     const metadata = await image.metadata();
 
-    const padding = 30; // pixels to add around box (adjust as needed)
+    const padding = 40; // pixels to add around box (adjust as needed)
 
     let cropArea = null;
 
