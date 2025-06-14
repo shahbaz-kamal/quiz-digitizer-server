@@ -25,7 +25,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // middlewares
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["http://localhost:5173","https://quiz-digitizer.netlify.app/"],
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -82,7 +82,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
       const pageImagePath = `pages/page-${
         pageNum < 10 ? `0${pageNum}` : pageNum
       }.jpg`;
-      
+
       let imageBase64 = null;
       //  Step 3.1: OCR with Tesseract
       const {

@@ -1,5 +1,3 @@
-const express = require("express");
-const cors = require("cors");
 const app = require("./src/app");
 const { connectDB } = require("./src/utils/connectDB");
 const port = process.env.PORT || 5000;
