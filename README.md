@@ -33,7 +33,7 @@
 
 2. **🖼️ PDF to High-Resolution Image Conversion**
 
-   - Converts each page to high-DPI JPEG images using ````pdf-poppler```.
+   - Converts each page to high-DPI JPEG images using ```pdf-poppler```.
 
 
 3. **🧠 Text Extraction with OCR**
