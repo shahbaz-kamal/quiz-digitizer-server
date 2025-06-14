@@ -25,7 +25,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // middlewares
 const corsOptions = {
-  origin: ["http://localhost:5173","https://quiz-digitizer.netlify.app/"],
+  origin: ["http://localhost:5173", "https://quiz-digitizer.netlify.app"],
   credentials: true,
 };
 app.use(cors(corsOptions));
