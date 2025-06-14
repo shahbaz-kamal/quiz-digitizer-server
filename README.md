@@ -12,12 +12,7 @@
 
 ###
 
-## 🔗 Frontend Githup repo -->
-
-
-
-### -->
-
+## 🔗 Frontend Githup repo 
 <p align="left">https://github.com/shahbaz-kamal/quiz-digitizer-client.git</p>
 
 <!-- ###
