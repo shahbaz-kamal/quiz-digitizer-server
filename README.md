@@ -1,10 +1,10 @@
 <div align="center">
-  <img height="400" src="https://i.ibb.co.com/k3nDpmh/git-Hub-banner.jpg"  />
+  <img height="400" src="https://github.com/shahbaz-kamal/quiz-digitizer-server/blob/main/src/assets/github_banner.JPG"  />
 </div>
 
 ###
 
-<h1 align="left">:📚 Quiz Digitizer - Server 🧠</h1>
+<h1 align="left">📚 Quiz Digitizer - Server 🧠</h1>
 
 ###
 
@@ -12,15 +12,15 @@
 
 ###
 
-<!-- ## 🔗 Live Link -->
+## 🔗 Frontend Githup repo -->
 
 
 
-<!-- ### -->
+### -->
 
-<!-- <p align="left">https://71-digital-sign.netlify.app/</p> -->
+<p align="left">https://github.com/shahbaz-kamal/quiz-digitizer-client.git</p>
 
-<!-- ### -->
+<!-- ###
 <!-- ## 👨‍💼 Admin Info
 ###
 <p align="left">Admin Email: shahbaz@kamal.com</p>
@@ -89,6 +89,12 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
   <img width="12" />
   <img src="https://skillicons.dev/icons?i=express" height="40" alt="express logo"  />
+  <img width="12" />
+  <img src="https://raw.githubusercontent.com/Hopding/pdf-lib-docs/master/assets/logo-full.svg?sanitize=true" height="40" alt="express logo"  />
+  <img width="12" />
+  <img src="https://github.com/naptha/tesseract.js/blob/HEAD/docs/images/tesseract.png" height="40" alt="express logo"  />
+  <img width="12" />
+  <img src="https://img.icons8.com/?size=48&id=rnK88i9FvAFO&format=png" height="40" alt="express logo"  />
 </div>
 
 
