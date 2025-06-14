@@ -12,7 +12,8 @@
 
 ###
 
-## 🔗 Frontend Githup repo 
+## 🔗 Frontend Githup repo
+
 <p align="left">https://github.com/shahbaz-kamal/quiz-digitizer-client.git</p>
 
 <!-- ###
@@ -20,8 +21,6 @@
 ###
 <p align="left">Admin Email: shahbaz@kamal.com</p>
 <p align="left">Admin Password: 123456Aa</p> -->
-
-
 
 ## ✨ Features:
 
@@ -33,20 +32,17 @@
 
 2. **🖼️ PDF to High-Resolution Image Conversion**
 
-   - Converts each page to high-DPI JPEG images using ```pdf-poppler```.
-
+   - Converts each page to high-DPI JPEG images using `pdf-poppler`.
 
 3. **🧠 Text Extraction with OCR**
 
-   - Uses ```Tesseract.js``` to extract printed content from each page.
-   
+   - Uses `Tesseract.js` to extract printed content from each page.
 
 4. **🤖 AI-Powered Quiz Structuring (Gemini 1.5 Flash)**
 
    - Classifies question types (MCQ, SAQ, Activities, etc.)
    - Extracts instructions, options, and correct answers
-   -Detects diagram positions and bounding boxes intelligently
-
+     -Detects diagram positions and bounding boxes intelligently
 
 5. **✂️ Diagram Cropping with Sharp**
 
@@ -66,11 +62,10 @@
 
 9. **🛠️ RESTful API (Express.js)**
 
-   - Easy integration with frontend using ```/digitalize/process-pdf``` POST route.re feedback.
+   - Easy integration with frontend using `/digitalize/process-pdf` POST route.re feedback.
 
 10. **📦 MongoDB Integratio**
     - Persists processed quiz data for retrieval and reuse.
-
 
 ###
 
@@ -92,22 +87,17 @@
   <img src="https://img.icons8.com/?size=48&id=rnK88i9FvAFO&format=png" height="40" alt="express logo"  />
 </div>
 
-
-
-
 ###
+
 ###
 
 ## 💥 Dependencies:
 
-
-
 ###
+
 <p align="left">"@google/genai": "^1.4.0",<br>    "axios": "^1.9.0",<br>    "cors": "^2.8.5",<br>    "dotenv": "^16.5.0",<br>    "express": "^5.1.0",<br>    "mongodb": "^6.17.0",<br>    "multer": "^2.0.1",<br>    "pdf-lib": "^1.17.1",<br>    "pdf-poppler": "^0.2.1",<br>    "sharp": "^0.34.2",<br>    "tesseract.js": "^6.0.1"</p>
 
 ###
-
-
 
 ###
 
@@ -146,6 +136,7 @@ DB_PASS=***************************
 GEMINI_API_KEY=********************
 IMG_BB_API_KEY=********************
 ```
+
 5. Run the following command and open the website locally on port 5000:
 
 ```bash
@@ -153,7 +144,6 @@ npm start
 ```
 
 ###
-
 
 <p align="center" style="display: flex; align-items: center; justify-content: center;">
   <span style="font-size: 20px; font-weight: bold;">Front End</span>
@@ -183,8 +173,5 @@ npm install
 ```bash
 npm run dev
 ```
-
-
-
 
 ###
