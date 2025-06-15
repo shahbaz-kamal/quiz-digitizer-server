@@ -4,19 +4,19 @@
     "exam_name": "2023 P6 PRELIMINARY EXAM",
     "subject": "MATHEMATICS",
     "paper": "Paper 2",
-    "class_name": "Primary Six",
+    "class_name": "Primary 6",
     "exam_duration": "1 hour 30 minutes",
     "global_instructions": [
       "This question paper consists of 16 printed pages, including the cover page.",
       "Do not turn this page until you are told to do so.",
       "Follow all instructions carefully.",
       "Answer all questions.",
-      "Use a dark blue or black ballpoint pen to write your answers in the space provided for each question.",
+      "Use a dark blue or black ballpoint pen to write your answers in the space provided for each Question.",
       "Do not use correction fluid/tape or highlighters.",
       "You are allowed to use a calculator."
     ],
     "questions": [],
-    "_id": "684e06e7ae9fc86dd56c95b4"
+    "_id": "684e2facc22881fadbb9e642"
   },
   {
     "institution_name": null,
@@ -38,12 +38,12 @@
             "type": "Problem_Solving",
             "question_text": null,
             "options": [
-              "60",
-              "30",
-              "40",
-              "50"
+              "$30",
+              "$36",
+              "$40",
+              "$50"
             ],
-            "correct_answer": "60"
+            "correct_answer": "$40"
           }
         ]
       },
@@ -53,19 +53,19 @@
         "main_question_text": "ABCD is a rhombus. ∠BAC = 51°. What is the sum of ∠x and ∠y?",
         "diagram_info": [
           {
-            "diagram_description": "Diagram of a rhombus ABCD with angle BAC labeled as 51 degrees, angle BCD labeled as x, and angle ABC labeled as y.",
+            "diagram_description": "Diagram of a rhombus ABCD with an internal diagonal AC. Angle BAC is labeled 51 degrees. Angle ACB is labeled y. Angle ACD is labeled x.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 247,
-                "y_min": 504,
-                "x_max": 560,
-                "y_max": 673
+                "x_min": 173,
+                "y_min": 517,
+                "x_max": 490,
+                "y_max": 702
               }
             ],
             "position": "center",
             "is_table": false,
             "page_number": "1",
-            "diagram_img_url": "https://i.ibb.co/HpqBw3py/478502a273ac.jpg"
+            "diagram_img_url": "https://i.ibb.co/xtdcps2s/b14d87ba7572.jpg"
           }
         ],
         "parts": [
@@ -74,17 +74,17 @@
             "type": "Problem_Solving",
             "question_text": null,
             "options": [
-              "129",
-              "78",
-              "102",
-              "180"
+              "78°",
+              "102°",
+              "129°",
+              "139°"
             ],
-            "correct_answer": "129"
+            "correct_answer": "102°"
           }
         ]
       }
     ],
-    "_id": "684e0705ae9fc86dd56c95b5"
+    "_id": "684e2fcfc22881fadbb9e643"
   },
   {
     "institution_name": null,
@@ -101,19 +101,19 @@
         "main_question_text": "A tank contained 6l of water. The graph below shows the amount of water left in a tank at the end of each day. What is the total amount of water used on Day 2 and Day 4?",
         "diagram_info": [
           {
-            "diagram_description": "Line graph titled 'Amount of Water Left' showing the decrease in water over four days. The y-axis is 'Amount of Water (l)' from 0 to 6. The x-axis shows 'Day 1', 'Day 2', 'Day 3', 'Day 4'. The line plot shows 5L at Day 1, 4L at Day 2, 3L at Day 3, and 1.5L at Day 4.",
+            "diagram_description": "Line graph titled 'Amount of Water Left' showing water volume (liters) on the y-axis and Day (Day 1, Day 2, Day 3, Day 4) on the x-axis. The line shows the amount of water remaining in the tank decreasing over four days. Points on the graph are approximately: Day 1 (4.8L), Day 2 (4.1L), Day 3 (2.8L), Day 4 (1.5L).",
             "diagram_bounding_boxes": [
               {
-                "x_min": 187,
-                "y_min": 178,
-                "x_max": 776,
-                "y_max": 569
+                "x_min": 178,
+                "y_min": 240,
+                "x_max": 788,
+                "y_max": 595
               }
             ],
             "position": "center",
             "is_table": false,
-            "page_number": "2",
-            "diagram_img_url": "https://i.ibb.co/s9KZhcgt/1c74962896dc.jpg"
+            "page_number": "02",
+            "diagram_img_url": "https://i.ibb.co/9HnZ2b7m/168349971d50.jpg"
           }
         ],
         "parts": [
@@ -123,16 +123,16 @@
             "question_text": null,
             "options": [
               "2.0 L",
-              "2.5 L",
-              "3.0 L",
-              "3.5 L"
+              "2.1 L",
+              "1.3 L",
+              "0.7 L"
             ],
-            "correct_answer": "2.5 L"
+            "correct_answer": "2.0 L"
           }
         ]
       }
     ],
-    "_id": "684e0713ae9fc86dd56c95b6"
+    "_id": "684e2fe6c22881fadbb9e644"
   },
   {
     "institution_name": null,
@@ -154,12 +154,12 @@
             "type": "Problem_Solving",
             "question_text": null,
             "options": [
-              "$157.68",
-              "$155.63",
+              "$134.03",
               "$146.00",
-              "$134.03"
+              "$157.68",
+              "$105.49"
             ],
-            "correct_answer": "$155.63"
+            "correct_answer": "$157.68"
           }
         ]
       },
@@ -175,16 +175,16 @@
             "question_text": null,
             "options": [
               "13",
+              "2",
               "10",
-              "12",
-              "15"
+              "12"
             ],
             "correct_answer": "13"
           }
         ]
       }
     ],
-    "_id": "684e0724ae9fc86dd56c95b7"
+    "_id": "684e2ff0c22881fadbb9e645"
   },
   {
     "institution_name": null,
@@ -201,19 +201,19 @@
         "main_question_text": "The figure below is formed by joining five identical ¾-circle discs. Points A, B, C, D and E are centres of each ¾-circle disc. Given that the distance between B and D is 17 cm and the distance between the first and the last disc is 48 cm, find the length AB.",
         "diagram_info": [
           {
-            "diagram_description": "Diagram showing five identical three-quarter circle discs joined together to form an S-curve pattern. Points A, B, C, D, and E are centers of each disc. The horizontal distance between the outermost points of the B and D sections is labeled 17 cm. The total horizontal distance from the leftmost point of the first disc (A) to the rightmost point of the last disc (E) is labeled 48 cm.",
+            "diagram_description": "Diagram showing five ¾-circle discs (A, B, C, D, E) joined in a serpentine pattern. Centers A, B, C, D, E are marked. Horizontal distances of 17 cm (between centers B and D) and 48 cm (overall length) are indicated. A radius of 2 cm is marked on disc A.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 92,
+                "x_min": 104,
                 "y_min": 395,
-                "x_max": 619,
-                "y_max": 506
+                "x_max": 622,
+                "y_max": 569
               }
             ],
             "position": "center",
             "is_table": false,
-            "page_number": "04",
-            "diagram_img_url": "https://i.ibb.co/S9WBc90/38c5e41b2a99.jpg"
+            "page_number": "4",
+            "diagram_img_url": "https://i.ibb.co/99Nn8GVg/95e1b92a7bd8.jpg"
           }
         ],
         "parts": [
@@ -221,13 +221,18 @@
             "part_id": "main",
             "type": "Problem_Solving",
             "question_text": null,
-            "options": [],
+            "options": [
+              "9 cm",
+              "10 cm",
+              "12 cm",
+              "14 cm"
+            ],
             "correct_answer": "12 cm"
           }
         ]
       }
     ],
-    "_id": "684e0756ae9fc86dd56c95b8"
+    "_id": "684e3031c22881fadbb9e646"
   },
   {
     "institution_name": null,
@@ -244,62 +249,47 @@
         "main_question_text": "Serena has a monthly salary of $8650. She spent 1/5 of her money on food. The pie chart below shows how she used her monthly salary.",
         "diagram_info": [
           {
-            "diagram_description": "Pie chart showing Serena's monthly salary allocation with categories: Savings ($3000), Food, Transport ($865), Rent ($2422), and Shopping.",
+            "diagram_description": "Pie chart showing Serena's monthly salary distribution, with labeled sections for Savings ($3000), Transport ($865), Rent ($2422), Food, and Shopping.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 307,
-                "y_min": 203,
-                "x_max": 715,
-                "y_max": 412
+                "x_min": 270,
+                "y_min": 220,
+                "x_max": 640,
+                "y_max": 430
               }
             ],
             "position": "center",
             "is_table": false,
-            "page_number": "05",
-            "diagram_img_url": "https://i.ibb.co/S4f78hRj/ba0aa99fb621.jpg"
+            "page_number": "5",
+            "diagram_img_url": "https://i.ibb.co/bgkNqGWz/a6d92aac9cca.jpg"
           }
         ],
         "parts": [
           {
             "part_id": "a",
-            "type": "Problem_Solving",
+            "type": "SAQ",
             "question_text": "How much money did Serena spend on food?",
-            "options": [
-              "$1730",
-              "$865",
-              "$2422",
-              "$3000"
-            ],
+            "options": [],
             "correct_answer": "$1730"
           },
           {
             "part_id": "b",
-            "type": "Problem_Solving",
+            "type": "SAQ",
             "question_text": "What fraction of her salary did Serena spend on rent and transport?",
-            "options": [
-              "19/50",
-              "1/5",
-              "1/4",
-              "2/5"
-            ],
-            "correct_answer": "19/50"
+            "options": [],
+            "correct_answer": "N/A"
           },
           {
             "part_id": "c",
-            "type": "Problem_Solving",
+            "type": "SAQ",
             "question_text": "What percentage of her salary did she spend on shopping? Give your answer correct to nearest 1%.",
-            "options": [
-              "7%",
-              "6%",
-              "8%",
-              "10%"
-            ],
-            "correct_answer": "7%"
+            "options": [],
+            "correct_answer": "N/A"
           }
         ]
       }
     ],
-    "_id": "684e0769ae9fc86dd56c95b9"
+    "_id": "684e303cc22881fadbb9e647"
   },
   {
     "institution_name": null,
@@ -316,33 +306,33 @@
         "main_question_text": "The figure below is not drawn to scale. ABEF is a parallelogram and BCDE is a trapezium. BE//CD, AB//FD and BC//AD. DF is a straight line. ∠ADF = 42° and ∠DAF = 68°.",
         "diagram_info": [
           {
-            "diagram_description": "Geometric figure showing a parallelogram ABEF and a trapezium BCDE. Points A, B, C, D, E, F are labeled. Angles ∠ADF = 42° and ∠DAF = 68° are indicated.",
+            "diagram_description": "Geometric figure showing a parallelogram ABEF and a trapezium BCDE. The figure includes vertices A, B, C, D, E, F with specified angles ∠ADF = 42° and ∠DAF = 68°. Parallel lines are indicated: BE//CD, AB//FD, BC//AD. DF is shown as a straight line.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 326,
-                "y_min": 202,
-                "x_max": 618,
-                "y_max": 436
+                "x_min": 360,
+                "y_min": 198,
+                "x_max": 600,
+                "y_max": 375
               }
             ],
             "position": "center",
             "is_table": false,
             "page_number": "06",
-            "diagram_img_url": "https://i.ibb.co/0R0XR5Gr/72e335240323.jpg"
+            "diagram_img_url": "https://i.ibb.co/R4sLJL4C/1f64e4248da7.jpg"
           }
         ],
         "parts": [
           {
             "part_id": "a",
             "type": "SAQ",
-            "question_text": "Find ∠BCD.",
+            "question_text": "Find ∠BCD",
             "options": [],
             "correct_answer": "N/A"
           },
           {
             "part_id": "b",
             "type": "SAQ",
-            "question_text": "Find ∠ABE.",
+            "question_text": "Find ∠ABE",
             "options": [],
             "correct_answer": "N/A"
           },
@@ -356,7 +346,7 @@
         ]
       }
     ],
-    "_id": "684e0773ae9fc86dd56c95ba"
+    "_id": "684e306bc22881fadbb9e648"
   },
   {
     "institution_name": null,
@@ -378,29 +368,34 @@
             "type": "Problem_Solving",
             "question_text": "What time did they meet?",
             "options": [
-              "11:00 a.m.",
               "10:00 a.m.",
-              "12:00 p.m.",
-              "1:00 p.m."
+              "10:30 a.m.",
+              "11:00 a.m.",
+              "11:30 a.m."
             ],
             "correct_answer": "11:00 a.m."
           },
           {
             "part_id": "b",
             "type": "Problem_Solving",
-            "question_text": "How far would each train have travelled when they meet on the way?\nTrain X:\nTrain Y:",
-            "options": [],
-            "correct_answer": "N/A"
+            "question_text": "How far would each train have travelled when they meet on the way?",
+            "options": [
+              "Train X: 690 km, Train Y: 570 km",
+              "Train X: 570 km, Train Y: 690 km",
+              "Train X: 600 km, Train Y: 660 km",
+              "Train X: 720 km, Train Y: 540 km"
+            ],
+            "correct_answer": "Train X: 690 km, Train Y: 570 km"
           }
         ]
       }
     ],
-    "_id": "684e078eae9fc86dd56c95bb"
+    "_id": "684e3083c22881fadbb9e649"
   },
   {
     "institution_name": null,
     "exam_name": null,
-    "subject": null,
+    "subject": "Mathematics",
     "paper": null,
     "class_name": null,
     "exam_duration": null,
@@ -412,45 +407,40 @@
         "main_question_text": "The following table shows the charges for making an overseas call to Australia.",
         "diagram_info": [
           {
-            "diagram_description": "Table showing overseas call charges, with rows for 'First 15 minutes' and 'Every additional minute' and columns for 'Charges'.",
+            "diagram_description": "Table showing overseas call charges to Australia, with 'First 15 minutes' costing '$2.60' and 'Every additional minute' costing 'p ¢ per minute'.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 206,
-                "y_min": 213,
-                "x_max": 695,
-                "y_max": 278
+                "x_min": 200,
+                "y_min": 180,
+                "x_max": 670,
+                "y_max": 280
               }
             ],
             "position": "center",
             "is_table": true,
             "page_number": "08",
-            "diagram_img_url": "https://i.ibb.co/GQp2X3kN/b26438661be8.jpg"
+            "diagram_img_url": "https://i.ibb.co/B5YqCh5J/624406f11e6a.jpg"
           }
         ],
         "parts": [
           {
             "part_id": "a",
-            "type": "SAQ",
-            "question_text": "Mrs Jamus paid $32 for a phone call to her sister in Australia. What was the duration of the call? Leave your answer in terms of p.",
+            "type": "Problem_Solving",
+            "question_text": "Mrs Jarits paid $32 for a phone call to her sister in Australia. What was the duration of the call? Leave your answer in terms of p.",
             "options": [],
             "correct_answer": "N/A"
           },
           {
             "part_id": "b",
             "type": "Problem_Solving",
-            "question_text": "Given that p = 60, find the duration of the call Mrs Jamus made.",
-            "options": [
-              "49 minutes",
-              "60 minutes",
-              "64 minutes",
-              "79 minutes"
-            ],
-            "correct_answer": "64 minutes"
+            "question_text": "Given that p = 60, find the duration of the call Mrs Jafnus made.",
+            "options": [],
+            "correct_answer": "N/A"
           }
         ]
       }
     ],
-    "_id": "684e079fae9fc86dd56c95bc"
+    "_id": "684e3091c22881fadbb9e64a"
   },
   {
     "institution_name": null,
@@ -472,29 +462,29 @@
             "type": "Problem_Solving",
             "question_text": "How much oil was transferred from Bottle A to Bottle B?",
             "options": [
-              "1.05 L",
-              "0.525 L",
-              "2.10 L",
-              "2.625 L"
+              "1.05",
+              "0.84",
+              "1.26",
+              "1.47"
             ],
-            "correct_answer": "1.05 L"
+            "correct_answer": "1.05"
           },
           {
             "part_id": "b",
             "type": "Problem_Solving",
             "question_text": "How much oil was in Bottle C at first?",
             "options": [
-              "0.525 L",
-              "1.05 L",
-              "1.575 L",
-              "5.25 L"
+              "0.525",
+              "0.420",
+              "0.630",
+              "0.735"
             ],
-            "correct_answer": "0.525 L"
+            "correct_answer": "0.525"
           }
         ]
       }
     ],
-    "_id": "684e07b3ae9fc86dd56c95bd"
+    "_id": "684e30abc22881fadbb9e64b"
   },
   {
     "institution_name": null,
@@ -516,10 +506,10 @@
             "type": "Problem_Solving",
             "question_text": "Marcus gets 6 wins in a row. What will be his score for the 6th win?",
             "options": [
-              "13",
               "11",
+              "13",
               "15",
-              "12"
+              "17"
             ],
             "correct_answer": "13"
           },
@@ -528,22 +518,22 @@
             "type": "Problem_Solving",
             "question_text": "How many times must he win the game in a row for him to achieve 99 points?",
             "options": [
-              "49",
+              "7",
+              "8",
               "9",
-              "50",
-              "48"
+              "10"
             ],
-            "correct_answer": "49"
+            "correct_answer": "9"
           }
         ]
       }
     ],
-    "_id": "684e07c6ae9fc86dd56c95be"
+    "_id": "684e30bac22881fadbb9e64c"
   },
   {
     "institution_name": null,
     "exam_name": null,
-    "subject": "Mathematics",
+    "subject": null,
     "paper": null,
     "class_name": null,
     "exam_duration": null,
@@ -555,19 +545,19 @@
         "main_question_text": "The figure below is made up of four squares of sides 10 cm, four quadrants and eight semicircles. Find the total area of the shaded parts. (Take π = 3.14)",
         "diagram_info": [
           {
-            "diagram_description": "Geometric figure made up of a 20cm x 20cm square, composed of four 10cm x 10cm squares, featuring an intricate pattern of shaded and unshaded regions formed by quadrants of 10cm radius at the corners and semicircles of 5cm radius internally. The shaded parts form a central cross and outer 'leaf' shapes.",
+            "diagram_description": "A square figure with side 10 cm, subdivided into four smaller squares. It contains complex shaded patterns resembling leaves and segments, along with dashed lines indicating arcs from corners.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 317,
-                "y_min": 226,
-                "x_max": 669,
-                "y_max": 453
+                "x_min": 310,
+                "y_min": 313,
+                "x_max": 622,
+                "y_max": 517
               }
             ],
             "position": "center",
             "is_table": false,
             "page_number": "11",
-            "diagram_img_url": "https://i.ibb.co/cKdMcHxN/7c69ea1d1c1e.jpg"
+            "diagram_img_url": "https://i.ibb.co/3yZCGL09/d3d44c06ddd1.jpg"
           }
         ],
         "parts": [
@@ -576,17 +566,17 @@
             "type": "Problem_Solving",
             "question_text": null,
             "options": [
-              "243 cm²",
-              "200 cm²",
-              "250 cm²",
-              "157 cm²"
+              "198",
+              "172",
+              "78.5",
+              "43"
             ],
-            "correct_answer": "243 cm²"
+            "correct_answer": "198"
           }
         ]
       }
     ],
-    "_id": "684e07f0ae9fc86dd56c95bf"
+    "_id": "684e30ecc22881fadbb9e64d"
   },
   {
     "institution_name": null,
@@ -600,22 +590,22 @@
       {
         "id": "Q14",
         "individual_instructions": null,
-        "main_question_text": "The container shown below is made up of 2 cuboids and a 6-cm cube. The small cuboid has a square base of side 3 cm. The dimension of the big cuboid is 16 cm by 9 cm by 5 cm. There is 864 ml of water in the container and the height of the water level in the small cuboid and the cube is the same. What is the height of the water level from the base of the container?",
+        "main_question_text": "The container shown below is made up of 2 cuboids and a 6-cm cube. The small cuboid has a square base of side 3m. The dimension of the big cuboid is 16 cm by 9 cm by 5 cm. There is 864 ml of water in the container and the height of the water level in the small cuboid and the cube is the same. What is the height of the water level from the base of the container?",
         "diagram_info": [
           {
-            "diagram_description": "Diagram of a container composed of a large cuboid (16cm x 9cm x 5cm), with a smaller cuboid (3cm base, unclear height) and a 6cm cube (6cm base, unclear height) placed on its top surface. A dashed line indicates the water level, labeled with '? cm' from the base of the container.",
+            "diagram_description": "Diagram of a container made of two cuboids and a cube, showing a larger base cuboid (16 cm by 9 cm by 5 cm) and two smaller structures on top: a 6-cm cube and a smaller cuboid with a 3 cm square base. A dashed line indicates the water level within the container, labeled with a question mark for height from the base.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 125,
-                "y_min": 250,
-                "x_max": 680,
-                "y_max": 480
+                "x_min": 142,
+                "y_min": 290,
+                "x_max": 760,
+                "y_max": 600
               }
             ],
             "position": "center",
             "is_table": false,
             "page_number": "12",
-            "diagram_img_url": "https://i.ibb.co/939WRYRh/8d2bf0a515ec.jpg"
+            "diagram_img_url": "https://i.ibb.co/B58MLbpg/8b2200ef2be1.jpg"
           }
         ],
         "parts": [
@@ -634,7 +624,7 @@
         ]
       }
     ],
-    "_id": "684e0803ae9fc86dd56c95c0"
+    "_id": "684e310ac22881fadbb9e64e"
   },
   {
     "institution_name": null,
@@ -658,8 +648,8 @@
             "options": [
               "86",
               "85",
-              "91",
-              "82"
+              "87",
+              "84.5"
             ],
             "correct_answer": "86"
           },
@@ -669,16 +659,16 @@
             "question_text": "Simon's mark was recorded incorrectly. He was given an additional of 7.5 marks. What is the correct average score of the 3 boys?",
             "options": [
               "83.5",
-              "86",
-              "84.5",
-              "82.5"
+              "84",
+              "82.5",
+              "85"
             ],
             "correct_answer": "83.5"
           }
         ]
       }
     ],
-    "_id": "684e080dae9fc86dd56c95c1"
+    "_id": "684e3119c22881fadbb9e64f"
   },
   {
     "institution_name": null,
@@ -695,19 +685,19 @@
         "main_question_text": "The figure below is not drawn to scale. ABE is an equilateral triangle and BCD is an isosceles triangle. ABC and BDF are straight lines and AC//EF. ∠EBD = 90° and ∠BED = 43°.",
         "diagram_info": [
           {
-            "diagram_description": "Geometric figure with points A, B, C, D, E, F, showing an equilateral triangle ABE, an isosceles triangle BCD, straight lines ABC and BDF, and parallel lines AC and EF. Angle EBD is 90 degrees and angle BED is 43 degrees.",
+            "diagram_description": "Geometric figure with triangles ABE and BCD, connected by lines. Points A, B, C, D, E, F are labeled. Line segments ABC and BDF are straight lines. AC is parallel to EF. Angles EBD = 90 degrees and BED = 43 degrees are marked.",
             "diagram_bounding_boxes": [
               {
-                "x_min": 140,
-                "y_min": 226,
-                "x_max": 792,
-                "y_max": 427
+                "x_min": 104,
+                "y_min": 279,
+                "x_max": 785,
+                "y_max": 563
               }
             ],
             "position": "center",
             "is_table": false,
             "page_number": "14",
-            "diagram_img_url": "https://i.ibb.co/PKyRxH0/71c4c548a8a3.jpg"
+            "diagram_img_url": "https://i.ibb.co/qMhXq2c7/c7bfc573c8ec.jpg"
           }
         ],
         "parts": [
@@ -730,12 +720,12 @@
             "type": "SAQ",
             "question_text": "Find ∠EDF.",
             "options": [],
-            "correct_answer": "21°"
+            "correct_answer": "N/A"
           }
         ]
       }
     ],
-    "_id": "684e0817ae9fc86dd56c95c2"
+    "_id": "684e3124c22881fadbb9e650"
   },
   {
     "institution_name": null,
@@ -749,26 +739,36 @@
       {
         "id": "Q17",
         "individual_instructions": null,
-        "main_question_text": "A box contained some twenty-cent, fifty-cent and one-dollar coins. 24% of the coins are twenty-cent coins. The ratio of the number of fifty-cent coins to the number of one-dollar coins is 7 : 12. When 62.5% of the twenty-cent coins were removed, the total number of coins decreased by 15%. In the end there were 255 coins left.",
+        "main_question_text": "A box contained some twenty-cent, fifty-cent and one-dollar coins. 24% of the coins are twenty-cent coins. The ratio of the number of fifty-cent coins to the number of one-dollar cons is 7 : 12. When 62.5% of the twenty-cent cains were removed, the total number of coins decreased by 15%. In the end there were 255 coins left.",
         "diagram_info": [],
         "parts": [
           {
             "part_id": "a",
             "type": "Problem_Solving",
             "question_text": "How many twenty-cent coins were removed?",
-            "options": [],
+            "options": [
+              "45",
+              "36",
+              "54",
+              "60"
+            ],
             "correct_answer": "45"
           },
           {
             "part_id": "b",
             "type": "Problem_Solving",
             "question_text": "How many one-dollar coins were there in the box?",
-            "options": [],
+            "options": [
+              "144",
+              "120",
+              "168",
+              "192"
+            ],
             "correct_answer": "144"
           }
         ]
       }
     ],
-    "_id": "684e0827ae9fc86dd56c95c3"
+    "_id": "684e312fc22881fadbb9e651"
   }
 ]
