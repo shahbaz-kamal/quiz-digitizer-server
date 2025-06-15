@@ -1,7 +1,7 @@
 //importing required constants and modules
+const cors = require("cors");
 const express = require("express");
 require("dotenv").config();
-const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const fsPromises = fs.promises;
@@ -14,30 +14,35 @@ const poppler = require("pdf-poppler");
 const helperForSendingImageToGemini = require("./utils/helperForSendingImageToGemini");
 const cropWithFallback = require("./utils/cropWithFallbacks");
 const { questionCollection } = require("./utils/connectDB");
-const {
-  cleanUpPreviousData,
-  deletePdfAfterProcessing,
-} = require("./utils/cleanUpPreviousData");
+const cleanUpPreviousData = require("./utils/cleanUpPreviousData");
 const app = express();
-
-//initiating gemini api
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // middlewares
 const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "https://quiz-digitizer.netlify.app",
-    "http://localhost:5174",
-  ],
+  origin: ["http://localhost:5173"],
   credentials: true,
 };
 app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(logger);
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 // CRUD
+//initiating gemini api
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
 app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
+  //  1. Clear database
+  await questionCollection.deleteMany({});
+  console.log("✅ All previous questions deleted from the database");
   cleanUpPreviousData();
 
   // *✅  step 1: getting pdf file from frontend (performed in pdfUploadMulter.js middlewares)
@@ -48,7 +53,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
   //* ✅ step 2: converting pdf to image using pdf-poppler
 
   const filePath = req.file.path;
-
+  console.log(filePath);
   // step 2.1: Using pdf-lib to get total pages
   const pdfBytes = fs.readFileSync(filePath);
   const pdfDoc = await PDFDocument.load(pdfBytes);
@@ -225,13 +230,19 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
       );
     }
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash-preview-05-20",
-      contents: [{ role: "user", parts: geminiContents }],
-      generationConfig: {
-        responseMimeType: "application/json",
-      },
-    });
+    let response;
+
+    try {
+      response = await ai.models.generateContent({
+        model: "gemini-2.5-pro-preview-06-05",
+        contents: [{ role: "user", parts: geminiContents }],
+        generationConfig: {
+          responseMimeType: "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
     const responseJsonString = response.text.slice(7, -3); // Remove the "```json" and "```" from the start and end
     let cleanedJsonString = responseJsonString
@@ -275,8 +286,10 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
   // *✅ Step 6: Saving final JSON
 
   fs.writeFileSync("output.json", JSON.stringify(finalQuestions, null, 2)); // Saving the final questions to a JSON file (output.json)
-  deletePdfAfterProcessing(); // Deleting the PDF file after processing
-  res.json(finalQuestions); // Sending the final questions as a response
+  // deletePdfAfterProcessing(); // Deleting the PDF file after processing
+
+  console.log("✅ Sent final response to client");
+  res.json({ status: "success" }); // Sending the final questions as a response
   // try {
 
   // } catch (error) {
@@ -288,10 +301,11 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
 // getting all data
 app.get("/get-all-data", async (req, res) => {
   try {
-    const allData = await questionCollection.find({}).toArray();
-    res.json(allData);
+    const allData = await questionCollection.find().toArray();
+    console.log("✅ Retrieved questions:", allData.length);
+    res.send(allData);
   } catch (error) {
-    console.error(" Error fetching data:", error.message);
+    console.error("❌ Error fetching data:", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 });
