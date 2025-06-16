@@ -13,9 +13,9 @@ async function cropWithFallback(imagePath, diagram, cropId) {
     const image = sharp(imagePath);
     const metadata = await image.metadata();
 
-    const padding = 40; // general padding
-    const paddingLeft = 70; // more space on left
-    const paddingTop = 20; // reduced space on top
+    const padding = 0; // general padding
+    const paddingLeft = 0; // more space on left
+    const paddingTop = 0; // reduced space on top
     let cropArea = null;
 
     if (

@@ -1,0 +1,464 @@
+[
+  {
+    "institution_name": "Ai Tong School",
+    "exam_name": "2024 Term 2 Review",
+    "subject": "P4 Science",
+    "paper": null,
+    "class_name": "4",
+    "exam_duration": "40 minutes",
+    "global_instructions": "For each question from 1 to 9, four options are given. One of them is the correct answer.\nMake your choice (1, 2, 3 or 4) and shade your answer on the Optical Answer Sheet.",
+    "questions": [
+      {
+        "id": "1",
+        "individual_instructions": null,
+        "main_question_text": "The diagram below shows the human digestive system.\n\nWhich of the following statements is correct?",
+        "diagram_info": [
+          {
+            "diagram_description": "A diagram of the human digestive system, with parts labeled A, B, C, and D, pointing to the mouth, stomach, and intestines.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 379,
+                "y_min": 416,
+                "x_max": 711,
+                "y_max": 661
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "1",
+            "diagram_img_url": "https://i.ibb.co/KcwRhj9T/5d5813cd55d2.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Which of the following statements is correct?",
+            "options": [
+              "Digestion is completed in part C.",
+              "No digestion takes place in part A.",
+              "No digestive juice is found in part B.",
+              "Digested food is absorbed into the blood in part D."
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdc23614cc892844d2df7"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [
+      {
+        "id": "2",
+        "individual_instructions": "Study the table below on human body systems.",
+        "main_question_text": "Which of the following is correct?",
+        "diagram_info": [
+          {
+            "diagram_description": "A table showing four options, each with a body system, an organ, and the function of that organ. The table has three columns: 'Body system', 'Organ', and 'Function of organ'.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 182,
+                "y_min": 190,
+                "x_max": 878,
+                "y_max": 298
+              }
+            ],
+            "position": "above",
+            "is_table": true,
+            "page_number": "2",
+            "diagram_img_url": "https://i.ibb.co/xbzkRPf/f22aedf24172.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Which of the following is correct?",
+            "options": [
+              "Body system: Skeletal, Organ: Brain, Function of organ: To protect our main organs.",
+              "Body system: Muscular, Organ: Muscles, Function of organ: To give our body its shape.",
+              "Body system: Circulatory, Organ: Heart, Function of organ: To pump blood to the rest of the body.",
+              "Body system: Respiratory, Organ: Blood, Function of organ: To transport waste materials away from different parts of the body."
+            ],
+            "correct_answer": null
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "individual_instructions": null,
+        "main_question_text": "A, B, C, D and E are organs in the digestive system. The graph below shows the amount of undigested food leaving each organ after a meal.\n\nWhich of the following is correct?",
+        "diagram_info": [
+          {
+            "diagram_description": "A bar graph showing the amount of undigested food leaving five different organs in the digestive system. The y-axis is labeled 'amount of undigested food leaving each organ' and the x-axis has bars labeled B, C, D, and E.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 367,
+                "y_min": 395,
+                "x_max": 864,
+                "y_max": 585
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "2",
+            "diagram_img_url": "https://i.ibb.co/Q7hMDmmh/1fe653c2307e.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Which of the following is correct?",
+            "options": [
+              "Mouth: A, Gullet: D, Small Intestine: B, Large Intestine: E",
+              "Mouth: B, Gullet: C, Small Intestine: D, Large Intestine: A",
+              "Mouth: E, Gullet: B, Small Intestine: C, Large Intestine: D",
+              "Mouth: B, Gullet: E, Small Intestine: A, Large Intestine: D"
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdc50614cc892844d2df8"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [
+      {
+        "id": "4",
+        "individual_instructions": null,
+        "main_question_text": "Alex and Kaylyn made the following statements about substance X which is in a container.\n\nWhich of the following tests can help determine which student is correct?",
+        "diagram_info": [
+          {
+            "diagram_description": "A diagram showing a beaker containing 'substance X' and two students, Alex and Kaylyn, with speech bubbles. Alex says 'Substance X is a solid' and Kaylyn says 'Substance X is a liquid'.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 158,
+                "y_min": 164,
+                "x_max": 907,
+                "y_max": 313
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "3",
+            "diagram_img_url": "https://i.ibb.co/XMyFjvR/14624c786709.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "",
+            "options": [
+              "To find out if substance X has mass.",
+              "To find out if substance X can be compressed.",
+              "To find out if substance X has a definite shape.",
+              "To find out if substance X has a definite volume."
+            ],
+            "correct_answer": null
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "individual_instructions": null,
+        "main_question_text": "An experiment was set up as shown below using a sealed metal container which holds 60 cm³ of water and 30 cm³ of air. 10 cm³ of water was removed from the container through the tap.\n\nWhich of the following correctly shows the amount of air in the container at the end of the experiment and the explanation of the results?",
+        "diagram_info": [
+          {
+            "diagram_description": "A diagram of an experimental setup showing a sealed metal container with a pump at the top and a tap on the side. The container is labeled as holding 30 cm³ of air above 60 cm³ of water.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 313,
+                "y_min": 515,
+                "x_max": 794,
+                "y_max": 661
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "3",
+            "diagram_img_url": "https://i.ibb.co/HThR1HzR/8459447d5fc1.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "",
+            "options": [
+              "Amount of air in container: 30 cm³, Explanation of the results: Air can be compressed.",
+              "Amount of air in container: 30 cm³, Explanation of the results: Air has no definite volume.",
+              "Amount of air in container: 40 cm³, Explanation of the results: Air can be compressed.",
+              "Amount of air in container: 40 cm³, Explanation of the results: Air has no definite volume."
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdc7d614cc892844d2df9"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": "BP-132",
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [
+      {
+        "id": "6",
+        "individual_instructions": null,
+        "main_question_text": "The diagram below shows two objects, X and Y, placed on a beam balance.",
+        "diagram_info": [
+          {
+            "diagram_description": "A diagram showing a beam balance with object X on the left pan and object Y on the right pan. The pan with X is lower than the pan with Y, indicating X has a greater mass than Y.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 343,
+                "y_min": 141,
+                "x_max": 660,
+                "y_max": 281
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "4",
+            "diagram_img_url": "https://i.ibb.co/tM7RK58d/0a0e9ad2fb6e.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Based on the observation above, which statement is correct?",
+            "options": [
+              "Y has a greater mass than X.",
+              "Y has a greater volume than X.",
+              "Both X and Y are made of the same material.",
+              "Objects with smaller mass, have smaller volume."
+            ],
+            "correct_answer": null
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "individual_instructions": null,
+        "main_question_text": "Which one of the following is a source of light?",
+        "diagram_info": [
+          {
+            "diagram_description": "Four diagrams representing options for a question: (1) a lit lamp, (2) a mirror, (3) an apple, and (4) the moon.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 288,
+                "y_min": 518,
+                "x_max": 696,
+                "y_max": 783
+              }
+            ],
+            "position": "below",
+            "is_table": false,
+            "page_number": "4",
+            "diagram_img_url": "https://i.ibb.co/9msMKY7P/300c796a0914.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Which one of the following is a source of light?",
+            "options": [
+              "a lit lamp",
+              "a mirror",
+              "an apple",
+              "the moon"
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdca2614cc892844d2dfa"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": "BP-133",
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [
+      {
+        "id": "8",
+        "individual_instructions": null,
+        "main_question_text": "Kaelyn conducted an experiment and realised that she can see light through the holes of the cardboards when they are aligned. However, when one of the cardboards is shifted slightly, she no longer sees the light.",
+        "diagram_info": [
+          {
+            "diagram_description": "An experimental setup showing a torchlight, three pieces of cardboard with holes, and an observer. The diagram illustrates that light travels in a straight line.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 248,
+                "y_min": 181,
+                "x_max": 818,
+                "y_max": 320
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "5",
+            "diagram_img_url": "https://i.ibb.co/jvT4G4R5/6818f8e1e27d.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "Which is the correct reason for her observation?",
+            "options": [
+              "Light can be reflected.",
+              "Light cannot be blocked.",
+              "Light is a form of energy.",
+              "Light travels in a straight line."
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdcba614cc892844d2dfb"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": "BP-134",
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [
+      {
+        "id": "9",
+        "individual_instructions": "Study the diagram below.",
+        "main_question_text": "How is Darwin able to see the picture?",
+        "diagram_info": [
+          {
+            "diagram_description": "A diagram showing a person named Darwin looking at a picture on an easel, which is illuminated by a hanging light.",
+            "diagram_bounding_boxes": [
+              {
+                "x_min": 171,
+                "y_min": 162,
+                "x_max": 796,
+                "y_max": 340
+              }
+            ],
+            "position": "above",
+            "is_table": false,
+            "page_number": "6",
+            "diagram_img_url": "https://i.ibb.co/TB0JvqLm/7672caacd031.jpg"
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "main",
+            "type": "MCQ",
+            "question_text": "How is Darwin able to see the picture?",
+            "options": [
+              "The picture gives off light and enters his eyes.",
+              "The light reflects the picture and enters his eyes.",
+              "The light enters his eyes and reflects on the picture.",
+              "The light falls on the picture and gets reflected into his eyes."
+            ],
+            "correct_answer": null
+          }
+        ]
+      }
+    ],
+    "_id": "684fdcea614cc892844d2dfc"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": "BP-135",
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdcfb614cc892844d2dfd"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdd07614cc892844d2dfe"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": "BP-137",
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdd15614cc892844d2dff"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdd23614cc892844d2e00"
+  },
+  {
+    "institution_name": null,
+    "exam_name": "Term 2 Science WA Correction Template",
+    "subject": "Science",
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdd36614cc892844d2e01"
+  },
+  {
+    "institution_name": null,
+    "exam_name": null,
+    "subject": null,
+    "paper": null,
+    "class_name": null,
+    "exam_duration": null,
+    "global_instructions": null,
+    "questions": [],
+    "_id": "684fdd44614cc892844d2e02"
+  }
+]
