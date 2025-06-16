@@ -13,9 +13,12 @@ async function cropWithFallback(imagePath, diagram, cropId) {
     const image = sharp(imagePath);
     const metadata = await image.metadata();
 
-    const padding = 0; // general padding
-    const paddingLeft = 0; // more space on left
-    const paddingTop = 0; // reduced space on top
+    // Custom padding for each side (in pixels)
+    const paddingLeft = 20;
+    const paddingRight = 0;
+    const paddingTop = 0;
+    const paddingBottom = 20;
+
     let cropArea = null;
 
     if (
@@ -23,16 +26,20 @@ async function cropWithFallback(imagePath, diagram, cropId) {
       diagram.diagram_bounding_boxes.length > 0
     ) {
       const box = diagram.diagram_bounding_boxes[0];
+
+      const left = Math.max(0, box.x_min - paddingLeft);
+      const top = Math.max(0, box.y_min - paddingTop);
+      const right = Math.min(metadata.width, box.x_max + paddingRight);
+      const bottom = Math.min(metadata.height, box.y_max + paddingBottom);
+
       cropArea = {
-        left: Math.max(0, box.x_min - paddingLeft),
-        top: Math.max(0, box.y_min - paddingTop),
-        width:
-          Math.min(metadata.width, box.x_max + padding) - box.x_min + padding,
-        height:
-          Math.min(metadata.height, box.y_max + padding) - box.y_min + padding,
+        left,
+        top,
+        width: right - left,
+        height: bottom - top,
       };
     } else {
-      // Use position fallback based on human-readable position estimate
+      // Fallback region-based cropping (no bounding box found)
       const posText = diagram.position?.toLowerCase?.() || "center";
 
       const W = metadata.width;
