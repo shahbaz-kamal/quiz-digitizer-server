@@ -19,8 +19,8 @@
     "express": "^5.1.0",
     "mongodb": "^6.17.0",
     "multer": "^2.0.1",
+    "node-poppler": "^8.0.1",
     "pdf-lib": "^1.17.1",
-    "pdf-poppler": "^0.2.1",
     "sharp": "^0.34.2",
     "tesseract.js": "^6.0.1"
   }

@@ -10,16 +10,18 @@ const upload = require("./middlewares/pdfUploadMulter");
 const { PDFDocument } = require("pdf-lib");
 const Tesseract = require("tesseract.js");
 const { GoogleGenAI } = require("@google/genai");
-const poppler = require("pdf-poppler");
 const helperForSendingImageToGemini = require("./utils/helperForSendingImageToGemini");
 const cropWithFallback = require("./utils/cropWithFallbacks");
 const { questionCollection } = require("./utils/connectDB");
 const cleanUpPreviousData = require("./utils/cleanUpPreviousData");
+const { Poppler } = require("node-poppler");
+const poppler = new Poppler();
+const { resizeAllImages } = require("./utils/resizeAllImages");
 const app = express();
 
 // middlewares
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://2efb-103-55-145-6.ngrok-free.app"],
+  origin: ["http://localhost:5173", "https://noverse.azurewebsites.net"],
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -60,18 +62,34 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
   const totalPages = pdfDoc.getPageCount();
 
   // Step 2.2: Converting PDF pages to images using pdf-poppler
-  const popplerOptions = {
-    format: "jpeg",
-    out_dir: "./pages",
-    out_prefix: "page",
-    page: null, // all pages
-    dpi: 600,
+  //!node poppler starts
+  const options = {
+    pngFile: false, // if false, will output JPEG
+    jpegFile: true,
+
+    singleFile: false, // produce separate images for each page
   };
 
-  await poppler.convert(filePath, popplerOptions);
+  const outputPrefix = path.join("pages", "page");
+
+  try {
+    await poppler.pdfToCairo(filePath, outputPrefix, options);
+  } catch (error) {
+    console.error(
+      "❌ Failed to convert PDF to images using node-poppler:",
+      error
+    );
+    return res.status(500).send("Failed to convert PDF to image.");
+  }
+  //using sharp to reduce quality
+
+  await resizeAllImages();
+  console.log("✅ Resized all images to ~87 DPI visual size");
+
+  //!node poppler ends
+
   const outputFiles = fs.readdirSync("./pages");
 
-  // Renaming non-padded files to zero-padded (e.g., page-1.jpg → page-01.jpg)
   outputFiles.forEach((file) => {
     const match = file.match(/^page-(\d+)\.jpg$/);
     if (match) {
@@ -81,6 +99,7 @@ app.post("/digitalize/process-pdf", upload.single("pdf"), async (req, res) => {
       const newPath = path.join("pages", `page-${padded}.jpg`);
 
       fs.renameSync(oldPath, newPath);
+      console.log("inside output files .for each");
     }
   });
 
