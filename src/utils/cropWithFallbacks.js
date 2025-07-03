@@ -14,9 +14,9 @@ async function cropWithFallback(imagePath, diagram, cropId) {
     const metadata = await image.metadata();
 
     // Custom padding for each side (in pixels)
-    const paddingLeft = 20;
+    const paddingLeft = 0;
     const paddingRight = 0;
-    const paddingTop = 0;
+    const paddingTop = 15;
     const paddingBottom = 20;
 
     let cropArea = null;
@@ -27,9 +27,14 @@ async function cropWithFallback(imagePath, diagram, cropId) {
     ) {
       const box = diagram.diagram_bounding_boxes[0];
 
-      const left = Math.max(0, box.x_min - paddingLeft);
+      // const left = Math.max(0, box.x_min - paddingLeft);
+      // const right = Math.min(metadata.width, box.x_max + paddingRight);
+
+      const left = Math.max(0, 0 + paddingLeft); // default 0 + optional left padding
+      const right = Math.min(metadata.width, metadata.width - paddingRight); // full width - optional right padding
+
       const top = Math.max(0, box.y_min - paddingTop);
-      const right = Math.min(metadata.width, box.x_max + paddingRight);
+
       const bottom = Math.min(metadata.height, box.y_max + paddingBottom);
 
       cropArea = {
